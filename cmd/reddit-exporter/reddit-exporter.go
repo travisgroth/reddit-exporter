@@ -29,11 +29,6 @@ var rootCmd = &cobra.Command{
 			log.SetLevel(log.DebugLevel)
 		}
 
-		http.Handle("/metrics", promhttp.Handler())
-		bindAddress := fmt.Sprintf("%s:%d", address, port)
-		log.Info("Listening on ", bindAddress)
-		go func() { log.Fatal(http.ListenAndServe(bindAddress, nil)) }()
-
 		cfg := graw.Config{SubredditComments: subs, Subreddits: subs}
 		script, _ := reddit.NewScript("graw:reddit-exporter:0.1.0", time.Second*1)
 
@@ -44,13 +39,19 @@ var rootCmd = &cobra.Command{
 		)
 
 		for _, regexFile := range regexFiles {
-			err := addRegexHandler(scanner, regexFile)
+			err := addRegexHandlers(scanner, regexFile)
 			if err != nil {
 				log.Fatalf("Failed to load regex file %s: %s", regexFile, err)
 			}
 		}
 
+		http.Handle("/metrics", promhttp.Handler())
+		bindAddress := fmt.Sprintf("%s:%d", address, port)
+		log.Info("Listening on ", bindAddress)
+		go func() { log.Fatal(http.ListenAndServe(bindAddress, nil)) }()
+
 		scanner.Run()
+
 	},
 }
 

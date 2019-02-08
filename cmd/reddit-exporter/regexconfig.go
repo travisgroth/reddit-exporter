@@ -13,7 +13,7 @@ var (
 	RegexConfigs map[string]map[string]string
 )
 
-func addRegexHandler(s *scanner.Scanner, file string) error {
+func addRegexHandlers(s *scanner.Scanner, file string) error {
 
 	v := viper.New()
 	v.SetConfigFile(file)

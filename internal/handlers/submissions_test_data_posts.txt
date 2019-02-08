@@ -1,0 +1,5 @@
+# HELP subreddit_post Post count by sub, flair and type
+# TYPE subreddit_post counter
+subreddit_post{flair="", subreddit="test", type="link"} 1
+subreddit_post{flair="", subreddit="test", type="self"} 1
+subreddit_post{flair="testFlair", subreddit="test", type="link"} 1

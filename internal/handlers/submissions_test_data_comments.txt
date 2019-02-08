@@ -1,0 +1,8 @@
+
+
+# HELP subreddit_comment Comment counters by type and sub
+# TYPE subreddit_comment counter
+subreddit_comment{subreddit="test", type="discussion"} 1
+subreddit_comment{subreddit="test", type="response"} 1
+
+

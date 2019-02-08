@@ -1,0 +1,16 @@
+
+# HELP subreddit_comment_regex Comment regex counters by handler name, regex name, and sub
+# TYPE subreddit_comment_regex counter
+subreddit_comment_regex{match="testGroup", name="testHandler", subreddit="test"} 1
+
+
+
+
+# HELP subreddit_post_regex Post regex counters by handler name, regex name and sub
+# TYPE subreddit_post_regex counter
+subreddit_post_regex{match="testGroup", name="testHandler", subreddit="test"} 1
+subreddit_post_regex{match="testGroup", name="testHandler", subreddit="testTitle"} 1
+
+
+
+

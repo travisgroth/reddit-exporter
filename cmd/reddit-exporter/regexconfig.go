@@ -3,17 +3,23 @@ package main
 import (
 	"fmt"
 
+	"github.com/turnage/graw/botfaces"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"github.com/travisgroth/reddit-exporter/internal/handlers"
-	"github.com/travisgroth/reddit-exporter/internal/scanner"
 )
 
 var (
 	RegexConfigs map[string]map[string]string
 )
 
-func addRegexHandlers(s *scanner.Scanner, file string) error {
+type contentScanner interface {
+	AddCommentHandler(botfaces.CommentHandler)
+	AddPostHandler(botfaces.PostHandler)
+}
+
+func addRegexHandlers(s contentScanner, file string) error {
 
 	v := viper.New()
 	v.SetConfigFile(file)

@@ -36,8 +36,10 @@ func addRegexHandlers(s contentScanner, file string) error {
 	log.Infof("Parsing regex config %s", file)
 
 	for matchGroupName, matchGroupConfig := range RegexConfigs {
+		log.Debugf("Adding matchgroup: %s", matchGroupName)
 		regexHandler, _ := handlers.NewRegex(matchGroupName)
 		for matchName, matchConfig := range matchGroupConfig {
+			log.Debugf("Adding match: %s: '%s'", matchName, matchConfig)
 			err := regexHandler.AddMatch(matchName, matchConfig)
 
 			if err != nil {

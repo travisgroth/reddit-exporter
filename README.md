@@ -8,7 +8,7 @@ A single exporter can handle multiple subreddits and breaks down all stats by su
 * Comment counter by type (top level or reply)
 * Configurable regex matching counters for both post and comment content
 
-## Upcoming Capabilities
+## Planned Capabilities
 * Subscriber gauge
 * Active user gauge
 * Open to other suggestions
@@ -28,4 +28,5 @@ A single exporter can handle multiple subreddits and breaks down all stats by su
 ## Regex Configuration
 
 # Sample Metrics
+
 

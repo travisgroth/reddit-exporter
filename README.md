@@ -87,8 +87,8 @@ MyMatchGroup:
 
 Equivilent properties file:
 ```
-MyMatchGroup.MyFirstMatchName:^first$
-MyMatchGroup.MySecondMatchName:^first$
+MyMatchGroup.MyFirstMatchName=^first$
+MyMatchGroup.MySecondMatchName=^first$
 ```
 
 Each regex has a matchgroup name as well as a match name.  

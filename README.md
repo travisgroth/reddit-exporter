@@ -101,7 +101,7 @@ Each regex has a matchgroup name as well as a match name.
 
 Regexes are not wildcard padded so if you are looking for mid-string matching, be sure to include '.*' on both ends of your regex.
 
-reddit-exporter uses viper under the hood, so as long as your chosen format presents key/value matches as expected, any supported file format should work.  
+reddit-exporter uses [viper](https://github.com/spf13/viper) under the hood, so as long as your chosen format presents key/value matches as expected, any supported file format should work.  
 
 # Sample Metrics
 

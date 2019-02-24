@@ -1,4 +1,8 @@
 # reddit-exporter
+![Docker Pulls](https://img.shields.io/docker/pulls/travisgroth/reddit-exporter.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/travisgroth/reddit-exporter)](https://goreportcard.com/report/github.com/travisgroth/reddit-exporter)
+![Docker Automated build](https://img.shields.io/docker/automated/travisgroth/reddit-exporter.svg)
+
 A prometheus compatible exporter for generating stats about the traffic on a given subreddit.
 
 A single exporter can handle multiple subreddits and breaks down all stats by subreddit in addition to other dimensions.

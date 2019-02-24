@@ -20,12 +20,12 @@ type Regex struct {
 
 var (
 	Comments = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_comment_regex", Help: "Comment regex counters by handler name, regex name, and sub"},
-		[]string{"subreddit", "name", "match"},
+		prom.CounterOpts{Name: "subreddit_comment_regex", Help: "Comment regex counters by matchgroup name, match name, and sub"},
+		[]string{"subreddit", "matchgroup", "match"},
 	)
 	Posts = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_post_regex", Help: "Post regex counters by handler name, regex name and sub"},
-		[]string{"subreddit", "name", "match"},
+		prom.CounterOpts{Name: "subreddit_post_regex", Help: "Post regex counters by matchgroup name, match name and sub"},
+		[]string{"subreddit", "matchgroup", "match"},
 	)
 )
 
@@ -64,9 +64,9 @@ func (r *Regex) Comment(comment *reddit.Comment) error {
 	for _, regex := range r.Regexes {
 		if regex.Regex.MatchString(comment.Body) {
 			labels := prom.Labels{
-				"subreddit": comment.Subreddit,
-				"name":      r.Name,
-				"match":     regex.Name,
+				"subreddit":  comment.Subreddit,
+				"matchgroup": r.Name,
+				"match":      regex.Name,
 			}
 			Comments.With(labels).Inc()
 		}
@@ -78,9 +78,9 @@ func (r *Regex) Post(post *reddit.Post) error {
 	for _, regex := range r.Regexes {
 		if regex.Regex.MatchString(post.SelfText) || regex.Regex.MatchString(post.Title) {
 			labels := prom.Labels{
-				"subreddit": post.Subreddit,
-				"name":      r.Name,
-				"match":     regex.Name,
+				"subreddit":  post.Subreddit,
+				"matchgroup": r.Name,
+				"match":      regex.Name,
 			}
 			Posts.With(labels).Inc()
 		}

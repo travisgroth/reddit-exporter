@@ -15,12 +15,12 @@ jobs:
       - checkout
 
       # specify any bash command here prefixed with `run: `
-      - run: mkdir -p $TEST_RESULTS # create the test results directory
+      - run: mkdir -p $TEST_RESULTS $TEST_RESULTS/junit # create the test results directory
       - run: go get github.com/jstemmer/go-junit-report
       - run: go mod download
       - run:
           command: |
-            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/test-results.xml" EXIT
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/junit/test-results.xml" EXIT
             ./test.sh | tee ${TEST_RESULTS}/go-test.out
 
       - run: go build cmd/reddit-exporter/*.go

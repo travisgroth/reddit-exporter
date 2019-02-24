@@ -62,7 +62,7 @@ func init() {
 	rootCmd.PersistentFlags().IntVarP(&port, "port", "p", 8000, "Metrics server port")
 	rootCmd.PersistentFlags().StringVar(&address, "address", "0.0.0.0", "Metrics server bind address")
 	rootCmd.PersistentFlags().StringSliceVar(&regexFiles, "regexfile", nil,
-		"File containing regex matches in format 'name;regex'\nCan be specified multiple times or comma separated")
+		"File containing regex matches in format 'matchgroup.matchname=[regex']\nCan be specified multiple times or comma separated")
 
 	rootCmd.MarkPersistentFlagRequired("subreddit")
 }

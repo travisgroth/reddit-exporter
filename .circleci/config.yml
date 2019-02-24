@@ -20,7 +20,7 @@ jobs:
       - run: go mod download
       - run:
           command: |
-            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/junit/test-results.xml" EXIT
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/junit/results.xml" EXIT
             ./test.sh | tee ${TEST_RESULTS}/go-test.out
 
       - run: go build cmd/reddit-exporter/*.go

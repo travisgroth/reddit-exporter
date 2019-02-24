@@ -117,22 +117,19 @@ test.the=.* the .*
 ```
 # HELP subreddit_comment Comment counters by type and sub
 # TYPE subreddit_comment counter
-subreddit_comment{subreddit="AskReddit",type="discussion"} 35
-subreddit_comment{subreddit="AskReddit",type="response"} 27
-subreddit_comment{subreddit="WTF",type="discussion"} 1
-subreddit_comment{subreddit="WTF",type="response"} 1
-# HELP subreddit_comment_regex Comment regex counters by handler name, regex name, and sub
+subreddit_comment{subreddit="AskReddit",type="discussion"} 56
+subreddit_comment{subreddit="AskReddit",type="response"} 45
+subreddit_comment{subreddit="WTF",type="discussion"} 3
+# HELP subreddit_comment_regex Comment regex counters by matchgroup name, match name, and sub
 # TYPE subreddit_comment_regex counter
-subreddit_comment_regex{match="the",name="test",subreddit="AskReddit"} 21
-subreddit_comment_regex{match="the",name="test",subreddit="WTF"} 2
+subreddit_comment_regex{match="the",matchgroup="test",subreddit="AskReddit"} 42
 # HELP subreddit_post Post count by sub, flair and type
 # TYPE subreddit_post counter
-subreddit_post{flair="",subreddit="AskReddit",type="self"} 8
+subreddit_post{flair="",subreddit="AskReddit",type="self"} 7
 subreddit_post{flair="",subreddit="WTF",type="link"} 1
-# HELP subreddit_post_regex Post regex counters by handler name, regex name and sub
+# HELP subreddit_post_regex Post regex counters by matchgroup name, match name and sub
 # TYPE subreddit_post_regex counter
-subreddit_post_regex{match="the",name="test",subreddit="AskReddit"} 1
-subreddit_post_regex{match="the",name="test",subreddit="WTF"} 1
+subreddit_post_regex{match="the",matchgroup="test",subreddit="AskReddit"} 3
 ```
 
 

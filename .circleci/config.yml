@@ -8,10 +8,25 @@ jobs:
       # specify the version
       - image: circleci/golang:1.11
 
+    environment: # environment variables for the build itself
+      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
+
     steps:
       - checkout
 
       # specify any bash command here prefixed with `run: `
+      - run: mkdir -p $TEST_RESULTS # create the test results directory
       - run: go mod download
-      - run: ./test.sh
+      - run:
+          command: |
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
+            ./test.sh | tee ${TEST_RESULTS}/go-test.out
+
       - run: go build cmd/reddit-exporter/*.go
+
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: /tmp/test-results

@@ -2,6 +2,7 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/travisgroth/reddit-exporter.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/travisgroth/reddit-exporter)](https://goreportcard.com/report/github.com/travisgroth/reddit-exporter)
 ![Docker Automated build](https://img.shields.io/docker/automated/travisgroth/reddit-exporter.svg)
+![CircleCI (all branches)](https://img.shields.io/circleci/project/github/travisgroth/reddit-exporter.svg)
 
 A prometheus compatible exporter for generating stats about the traffic on a given subreddit.  It is meant to help capture traffic and utilization trends over time without crawling over historic data.  The most likely use case is for monitoring a community related to a particular product or service, though more novel usage may arise.
 

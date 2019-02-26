@@ -35,9 +35,9 @@ func TestSubmissions(t *testing.T) {
 	}
 
 	testCommentData, _ := os.Open("submissions_test_data_comments.txt")
-	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testCommentData, "subreddit_comment"))
+	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testCommentData, "subreddit_comments_total"))
 
 	testPostData, _ := os.Open("submissions_test_data_posts.txt")
-	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testPostData, "subreddit_post"))
+	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testPostData, "subreddit_posts_total"))
 
 }

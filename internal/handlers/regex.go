@@ -20,11 +20,11 @@ type Regex struct {
 
 var (
 	Comments = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_comment_regex", Help: "Comment regex counters by matchgroup name, match name, and sub"},
+		prom.CounterOpts{Name: "subreddit_comment_matches_total", Help: "Comment regex counters by matchgroup name, match name, and sub"},
 		[]string{"subreddit", "matchgroup", "match"},
 	)
 	Posts = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_post_regex", Help: "Post regex counters by matchgroup name, match name and sub"},
+		prom.CounterOpts{Name: "subreddit_post_matches_total", Help: "Post regex counters by matchgroup name, match name and sub"},
 		[]string{"subreddit", "matchgroup", "match"},
 	)
 )

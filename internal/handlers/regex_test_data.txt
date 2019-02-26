@@ -1,15 +1,15 @@
 
-# HELP subreddit_comment_regex Comment regex counters by matchgroup name, match name, and sub
-# TYPE subreddit_comment_regex counter
-subreddit_comment_regex{match="testGroup", matchgroup="testHandler", subreddit="test"} 1
+# HELP subreddit_comment_matches_total Comment regex counters by matchgroup name, match name, and sub
+# TYPE subreddit_comment_matches_total counter
+subreddit_comment_matches_total{match="testGroup", matchgroup="testHandler", subreddit="test"} 1
 
 
 
 
-# HELP subreddit_post_regex Post regex counters by matchgroup name, match name and sub
-# TYPE subreddit_post_regex counter
-subreddit_post_regex{match="testGroup", matchgroup="testHandler", subreddit="test"} 1
-subreddit_post_regex{match="testGroup", matchgroup="testHandler", subreddit="testTitle"} 1
+# HELP subreddit_post_matches_total Post regex counters by matchgroup name, match name and sub
+# TYPE subreddit_post_matches_total counter
+subreddit_post_matches_total{match="testGroup", matchgroup="testHandler", subreddit="test"} 1
+subreddit_post_matches_total{match="testGroup", matchgroup="testHandler", subreddit="testTitle"} 1
 
 
 

@@ -6,11 +6,11 @@ import (
 
 var (
 	Comments = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_comment", Help: "Comment counters by type and sub"},
+		prom.CounterOpts{Name: "subreddit_comments_total", Help: "Comment counters by type and sub"},
 		[]string{"subreddit", "type"},
 	)
 	Posts = prom.NewCounterVec(
-		prom.CounterOpts{Name: "subreddit_post", Help: "Post count by sub, flair and type"},
+		prom.CounterOpts{Name: "subreddit_posts_total", Help: "Post count by sub, flair and type"},
 		[]string{"subreddit", "flair", "type"},
 	)
 )

@@ -71,6 +71,6 @@ func TestRegex(t *testing.T) {
 	}
 
 	testRegexData, _ := os.Open("regex_test_data.txt")
-	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testRegexData, "subreddit_comment_regex", "subreddit_post_regex"))
+	assert.Nil(t, testutil.GatherAndCompare(prom.DefaultGatherer, testRegexData, "subreddit_comment_matches_total", "subreddit_post_matches_total"))
 
 }

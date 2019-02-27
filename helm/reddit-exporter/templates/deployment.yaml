@@ -9,6 +9,8 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
@@ -18,12 +20,14 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
     spec:
 {{- if .Values.regexmatches }}
       volumes:
-        - name: regexfile
+        - name: reddit-exporter-config
           configMap:
-            name: regexfile
+            name: {{ include "reddit-exporter.fullname" . }}-config
 {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -40,7 +44,7 @@ spec:
             - -v
 {{- end }}
 {{- if .Values.regexmatches }}
-            - --regexfile /regexfile.conf
+            - --regexfile=/config/regexfile.{{ .Values.regexMatchesFormat }}
 {{- end }}
           ports:
             - name: metrics
@@ -56,8 +60,8 @@ spec:
               port: metrics
 {{- if .Values.regexmatches }}
           volumeMounts:
-            - name: regexfile
-              mountPath: /regexfile.conf
+            - name: reddit-exporter-config
+              mountPath: /config/
 {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

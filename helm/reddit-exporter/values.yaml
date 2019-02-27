@@ -48,5 +48,6 @@ tolerations: []
 affinity: {}
 
 verbose: false
-regexmatches: false
+regexMatches: false
+regexMatchesFormat: yaml
 subreddits: []

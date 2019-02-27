@@ -1,4 +1,4 @@
-{{ if .Values.regexmatches }}
+{{ if .Values.regexMatches }}
 kind: ConfigMap
 apiVersion: v1
 metadata:

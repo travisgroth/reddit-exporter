@@ -23,7 +23,7 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
     spec:
-{{- if .Values.regexmatches }}
+{{- if .Values.regexMatches }}
       volumes:
         - name: reddit-exporter-config
           configMap:
@@ -43,7 +43,7 @@ spec:
 {{- if .Values.verbose }}
             - -v
 {{- end }}
-{{- if .Values.regexmatches }}
+{{- if .Values.regexMatches }}
             - --regexfile=/config/regexfile.{{ .Values.regexMatchesFormat }}
 {{- end }}
           ports:
@@ -58,7 +58,7 @@ spec:
             httpGet:
               path: /metrics
               port: metrics
-{{- if .Values.regexmatches }}
+{{- if .Values.regexMatches }}
           volumeMounts:
             - name: reddit-exporter-config
               mountPath: /config/

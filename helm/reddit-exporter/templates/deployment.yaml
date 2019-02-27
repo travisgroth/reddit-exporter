@@ -33,6 +33,8 @@ spec:
 {{- range .Values.subreddits }}
             - -s 
             - {{ . }}
+{{ else }}
+            - {{required "List of subreddits is required" .Values.subreddits }}
 {{- end }}
 {{- if .Values.verbose }}
             - -v

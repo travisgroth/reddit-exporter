@@ -47,6 +47,6 @@ tolerations: []
 
 affinity: {}
 
-subreddits: []
 verbose: false
 regexmatches: false
+subreddits: 

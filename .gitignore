@@ -10,7 +10,7 @@
 *.dll
 *.so
 *.dylib
-reddit-exporter
+/reddit-exporter
 
 # Test binary, built with `go test -c`
 *.test

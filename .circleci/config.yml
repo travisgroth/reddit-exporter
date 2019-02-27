@@ -25,6 +25,12 @@ jobs:
             ./test.sh | tee ${TEST_RESULTS}/go-test.out
 
       - run: go build cmd/reddit-exporter/*.go
+      - run:
+          name: install helm
+          command: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+      - run:
+          name: helm lint
+          command: helm lint --strict --set subreddits={foo} helm/reddit-exporter
 
       - store_artifacts:
           path: /tmp/test-results

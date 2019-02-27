@@ -49,4 +49,4 @@ affinity: {}
 
 verbose: false
 regexmatches: false
-subreddits: 
+subreddits: []

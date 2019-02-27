@@ -34,7 +34,7 @@ spec:
             - -s 
             - {{ . }}
 {{ else }}
-            - {{required "List of subreddits is required" .Values.subreddits }}
+            - {{required "List of subreddits is required" .Values.blah }}
 {{- end }}
 {{- if .Values.verbose }}
             - -v

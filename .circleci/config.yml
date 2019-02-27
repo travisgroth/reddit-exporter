@@ -30,7 +30,7 @@ jobs:
           command: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
       - run:
           name: helm lint
-          command: helm lint --strict helm/reddit-exporter
+          command: helm lint --strict --set subreddits={foo} helm/reddit-exporter
 
       - store_artifacts:
           path: /tmp/test-results

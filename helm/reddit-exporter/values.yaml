@@ -47,8 +47,6 @@ tolerations: []
 
 affinity: {}
 
-subreddits:
-  - askreddit
-  - wtf
+subreddits: []
 verbose: false
 regexmatches: false

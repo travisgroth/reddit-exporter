@@ -1,0 +1,13 @@
+{{ if .Values.regexmatches }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: regexfile-{{ include "reddit-exporter.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+    helm.sh/chart: {{ include "reddit-exporter.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data: |- 
+{{ .Values.regexmatches | indent 2}}
+{{ end }}

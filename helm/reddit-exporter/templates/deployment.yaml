@@ -1,0 +1,73 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "reddit-exporter.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+    helm.sh/chart: {{ include "reddit-exporter.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+{{- if .Values.regexmatches }}
+      volumes:
+        - name: regexfile
+          configMap:
+            name: regexfile
+{{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+{{- range .Values.subreddits }}
+            - -s 
+            - {{ . }}
+{{- end }}
+{{- if .Values.verbose }}
+            - -v
+{{- end }}
+{{- if .Values.regexmatches }}
+            - --regexfile /regexfile.conf
+{{- end }}
+          ports:
+            - name: metrics
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+{{- if .Values.regexmatches }}
+          volumeMounts:
+            - name: regexfile
+              mountPath: /regexfile.conf
+{{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

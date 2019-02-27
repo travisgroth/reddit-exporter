@@ -27,7 +27,7 @@ jobs:
       - run: go build cmd/reddit-exporter/*.go
       - run:
           name: install helm
-          command: https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+          command: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
       - run:
           name: helm lint
           command: helm lint helm/reddit-exporter

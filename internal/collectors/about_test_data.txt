@@ -1,0 +1,3 @@
+# HELP subreddit_active_users Current active users by sub
+# TYPE subreddit_active_users gauge
+subreddit_active_users{subreddit="test"} 99

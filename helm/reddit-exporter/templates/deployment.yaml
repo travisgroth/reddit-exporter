@@ -52,11 +52,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /health
               port: metrics
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /health
               port: metrics
 {{- if .Values.regexMatches }}
           volumeMounts:

@@ -46,6 +46,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		http.Handle("/metrics", promhttp.Handler())
+		http.HandleFunc("/health", health)
 		bindAddress := fmt.Sprintf("%s:%d", address, port)
 		log.Info("Listening on ", bindAddress)
 		go func() { log.Fatal(http.ListenAndServe(bindAddress, nil)) }()
@@ -53,6 +54,10 @@ var rootCmd = &cobra.Command{
 		scanner.Run()
 
 	},
+}
+
+func health(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Status OK")
 }
 
 func init() {

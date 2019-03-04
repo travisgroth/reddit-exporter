@@ -14,11 +14,8 @@ Internally, reddit-exporter runs a continous scan on _new_ content to a subreddi
 * Post counter by type
 * Comment counter by type (top level discussion or a reply)
 * Configurable regex matching counters for both post and comment content
-
-## Planned Capabilities
 * Subscriber gauge
 * Active user gauge
-* Open to other suggestions
 
 ## Maybe Capabilities
 * Custom metrics via RPC to a downstream service

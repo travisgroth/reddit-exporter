@@ -13,7 +13,7 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 8000
       protocol: TCP
-      name: metrics
+      name: http
   selector:
     app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

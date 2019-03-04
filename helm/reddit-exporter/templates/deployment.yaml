@@ -47,17 +47,17 @@ spec:
             - --regexfile=/config/regexfile.{{ .Values.regexMatchesFormat }}
 {{- end }}
           ports:
-            - name: metrics
+            - name: http
               containerPort: 8000
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /health
-              port: metrics
+              port: http
           readinessProbe:
             httpGet:
               path: /health
-              port: metrics
+              port: http
 {{- if .Values.regexMatches }}
           volumeMounts:
             - name: reddit-exporter-config

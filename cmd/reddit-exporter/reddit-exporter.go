@@ -5,9 +5,11 @@ import (
 	"net/http"
 	"time"
 
+	prom "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/travisgroth/reddit-exporter/internal/collectors"
 	"github.com/travisgroth/reddit-exporter/internal/scanner"
 	"github.com/turnage/graw"
 	"github.com/turnage/graw/reddit"
@@ -43,6 +45,12 @@ var rootCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalf("Failed to load regex file %s: %s", regexFile, err)
 			}
+		}
+
+		collectorClient := new(http.Client)
+		for _, subreddit := range subs {
+			c := collectors.NewAboutSubredditCollector(subreddit, collectorClient)
+			prom.MustRegister(c)
 		}
 
 		http.Handle("/metrics", promhttp.Handler())

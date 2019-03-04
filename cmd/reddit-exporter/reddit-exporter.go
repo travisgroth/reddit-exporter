@@ -5,9 +5,11 @@ import (
 	"net/http"
 	"time"
 
+	prom "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/travisgroth/reddit-exporter/internal/collectors"
 	"github.com/travisgroth/reddit-exporter/internal/scanner"
 	"github.com/turnage/graw"
 	"github.com/turnage/graw/reddit"
@@ -45,7 +47,14 @@ var rootCmd = &cobra.Command{
 			}
 		}
 
+		collectorClient := new(http.Client)
+		for _, subreddit := range subs {
+			c := collectors.NewAboutSubredditCollector(subreddit, collectorClient)
+			prom.MustRegister(c)
+		}
+
 		http.Handle("/metrics", promhttp.Handler())
+		http.HandleFunc("/health", health)
 		bindAddress := fmt.Sprintf("%s:%d", address, port)
 		log.Info("Listening on ", bindAddress)
 		go func() { log.Fatal(http.ListenAndServe(bindAddress, nil)) }()
@@ -53,6 +62,10 @@ var rootCmd = &cobra.Command{
 		scanner.Run()
 
 	},
+}
+
+func health(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Status OK")
 }
 
 func init() {

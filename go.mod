@@ -1,7 +1,10 @@
 module github.com/travisgroth/reddit-exporter
 
 require (
+	github.com/cameronstanley/go-reddit v0.0.0-20170423222116-4bfac7ea95af
+	github.com/coreos/etcd v3.3.10+incompatible
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/jarcoal/httpmock v0.0.0-20181110092731-53def6cd0f87
 	github.com/kylelemons/godebug v0.0.0-20170820004349-d65d576e9348 // indirect
 	github.com/prometheus/client_golang v0.9.2
 	github.com/sirupsen/logrus v1.3.0

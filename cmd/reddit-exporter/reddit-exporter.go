@@ -48,10 +48,8 @@ var rootCmd = &cobra.Command{
 		}
 
 		collectorClient := new(http.Client)
-		for _, subreddit := range subs {
-			c := collectors.NewAboutSubredditCollector(subreddit, collectorClient)
-			prom.MustRegister(c)
-		}
+		c := collectors.NewAboutSubredditCollector(subs, collectorClient)
+		prom.MustRegister(c)
 
 		http.Handle("/metrics", promhttp.Handler())
 		http.HandleFunc("/health", health)

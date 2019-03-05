@@ -5,11 +5,11 @@ import (
 	"os"
 	"testing"
 
+	prom "github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/jarcoal/httpmock"
-	prom "github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/testutil"
 )
 
 var (
@@ -32,15 +32,15 @@ func TestGet(t *testing.T) {
 
 	defer httpmock.DeactivateAndReset()
 
+	c := NewAboutSubredditCollector([]string{"pass", "fail"}, new(http.Client))
+
 	// pass
-	c := NewAboutSubredditCollector("pass", new(http.Client))
-	info, _ := c.get()
+	info, _ := c.getSubredditInfo("pass")
 	assert.Equal(t, float64(99), info.AccountsActive)
 	assert.Equal(t, float64(1), info.Subscribers)
 
 	//fail
-	c = NewAboutSubredditCollector("fail", new(http.Client))
-	info, err := c.get()
+	info, err := c.getSubredditInfo("fail")
 	assert.NotNil(t, err)
 	assert.Nil(t, info)
 }
@@ -49,7 +49,7 @@ func TestCollect(t *testing.T) {
 	setup()
 
 	defer httpmock.DeactivateAndReset()
-	c := NewAboutSubredditCollector("pass", new(http.Client))
+	c := NewAboutSubredditCollector([]string{"pass"}, new(http.Client))
 	prom.MustRegister(c)
 
 	testAboutData, _ := os.Open("about_test_data.txt")

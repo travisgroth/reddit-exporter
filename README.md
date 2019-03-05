@@ -118,6 +118,9 @@ test.the=.* the .*
 ```
 
 ```
+# HELP subreddit_active_users Current active users by sub
+# TYPE subreddit_active_users gauge
+subreddit_active_users{subreddit="askreddit"} 95117
 # HELP subreddit_comments_total Comment counters by type and sub
 # TYPE subreddit_comments_total counter
 subreddit_comments_total{subreddit="AskReddit",type="discussion"} 56
@@ -133,6 +136,9 @@ subreddit_posts_total{flair="",subreddit="WTF",type="link"} 1
 # HELP subreddit_post_matches_total Post regex counters by matchgroup name, match name and sub
 # TYPE subreddit_post_matches_total counter
 subreddit_post_matches_total{match="the",matchgroup="test",subreddit="AskReddit"} 3
+# HELP subreddit_subscriber_users Current subscriber users by sub
+# TYPE subreddit_subscriber_users gauge
+subreddit_subscriber_users{subreddit="askreddit"} 2.1760036e+07
 ```
 
 

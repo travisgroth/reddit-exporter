@@ -129,19 +129,19 @@ test.the=.* the .*
 subreddit_active_users{subreddit="askreddit"} 95117
 # HELP subreddit_comments_total Comment counters by type and sub
 # TYPE subreddit_comments_total counter
-subreddit_comments_total{subreddit="AskReddit",type="discussion"} 56
-subreddit_comments_total{subreddit="AskReddit",type="response"} 45
-subreddit_comments_total{subreddit="WTF",type="discussion"} 3
+subreddit_comments_total{subreddit="askreddit",type="discussion"} 56
+subreddit_comments_total{subreddit="askreddit",type="response"} 45
+subreddit_comments_total{subreddit="wtf",type="discussion"} 3
 # HELP subreddit_comment_matches_total Comment regex counters by matchgroup name, match name, and sub
 # TYPE subreddit_comment_matches_total counter
-subreddit_comment_matches_total{match="the",matchgroup="test",subreddit="AskReddit"} 42
+subreddit_comment_matches_total{match="the",matchgroup="test",subreddit="askreddit"} 42
 # HELP subreddit_posts_total Post count by sub, flair and type
 # TYPE subreddit_posts_total counter
-subreddit_posts_total{flair="",subreddit="AskReddit",type="self"} 7
-subreddit_posts_total{flair="",subreddit="WTF",type="link"} 1
+subreddit_posts_total{flair="",subreddit="askreddit",type="self"} 7
+subreddit_posts_total{flair="",subreddit="wtf",type="link"} 1
 # HELP subreddit_post_matches_total Post regex counters by matchgroup name, match name and sub
 # TYPE subreddit_post_matches_total counter
-subreddit_post_matches_total{match="the",matchgroup="test",subreddit="AskReddit"} 3
+subreddit_post_matches_total{match="the",matchgroup="test",subreddit="askreddit"} 3
 # HELP subreddit_subscriber_users Current subscriber users by sub
 # TYPE subreddit_subscriber_users gauge
 subreddit_subscriber_users{subreddit="askreddit"} 2.1760036e+07

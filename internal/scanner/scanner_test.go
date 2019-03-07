@@ -85,15 +85,15 @@ func (m *mockHandler) Post(post *reddit.Post) error {
 func TestCommentDispatch(t *testing.T) {
 	m := new(mockHandler)
 
+	d := new(dispatcher)
+	d.commentHandlers = []botfaces.CommentHandler{m}
+	d.postHandlers = []botfaces.PostHandler{m}
+
 	mockComment := new(reddit.Comment)
 	mockPost := new(reddit.Post)
 
 	m.On("Comment", mockComment).Return(nil)
 	m.On("Post", mockPost).Return(nil)
-
-	d := new(dispatcher)
-	d.commentHandlers = []botfaces.CommentHandler{m}
-	d.postHandlers = []botfaces.PostHandler{m}
 
 	d.Post(mockPost)
 	d.Comment(mockComment)
@@ -104,4 +104,25 @@ func TestCommentDispatch(t *testing.T) {
 	assert.Nil(t, d.Post(mockPost))
 	assert.Nil(t, d.Comment(mockComment))
 
+}
+
+func TestCapitalCommentDispatch(t *testing.T) {
+	m := new(mockHandler)
+
+	d := new(dispatcher)
+	d.commentHandlers = []botfaces.CommentHandler{m}
+	d.postHandlers = []botfaces.PostHandler{m}
+
+	mockCapitalizedSubComment := &reddit.Comment{Subreddit: "Caps"}
+	mockCapitalizedSubPost := &reddit.Post{Subreddit: "Caps"}
+	mockNonCapitalizedSubComment := &reddit.Comment{Subreddit: "caps"}
+	mockNonCapitalizedSubPost := &reddit.Post{Subreddit: "caps"}
+
+	m.On("Comment", mockNonCapitalizedSubComment).Return(nil)
+	m.On("Post", mockNonCapitalizedSubPost).Return(nil)
+
+	d.Post(mockCapitalizedSubPost)
+	d.Comment(mockCapitalizedSubComment)
+
+	m.AssertExpectations(t)
 }

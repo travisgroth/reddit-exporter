@@ -1,6 +1,7 @@
 package scanner
 
 import (
+	"strings"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -17,8 +18,11 @@ type dispatcher struct {
 }
 
 func (d *dispatcher) Comment(comment *reddit.Comment) error {
+
+	fixedComment := *comment
+	fixedComment.Subreddit = strings.ToLower(fixedComment.Subreddit)
 	for _, handler := range d.commentHandlers {
-		err := handler.Comment(comment)
+		err := handler.Comment(&fixedComment)
 		if err != nil {
 			log.Error("Failed to handle comment: ", err)
 		}
@@ -27,8 +31,10 @@ func (d *dispatcher) Comment(comment *reddit.Comment) error {
 }
 
 func (d *dispatcher) Post(post *reddit.Post) error {
+	fixedPost := *post
+	fixedPost.Subreddit = strings.ToLower(fixedPost.Subreddit)
 	for _, handler := range d.postHandlers {
-		err := handler.Post(post)
+		err := handler.Post(&fixedPost)
 		if err != nil {
 			log.Error("Failed to handle post: ", err)
 		}

@@ -1,9 +1,0 @@
-# HELP subreddit_active_users Current active users by sub
-# TYPE subreddit_active_users gauge
-subreddit_active_users{subreddit="pass"} 99
-
-
-# HELP subreddit_subscriber_users Current subscriber users by sub
-# TYPE subreddit_subscriber_users gauge
-subreddit_subscriber_users{subreddit="pass"} 1
-

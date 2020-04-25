@@ -1,5 +1,0 @@
-# HELP subreddit_posts_total Post count by sub, flair and type
-# TYPE subreddit_posts_total counter
-subreddit_posts_total{flair="", subreddit="test", type="link"} 1
-subreddit_posts_total{flair="", subreddit="test", type="self"} 1
-subreddit_posts_total{flair="testFlair", subreddit="test", type="link"} 1

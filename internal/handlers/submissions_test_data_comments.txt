@@ -1,6 +1,0 @@
-# HELP subreddit_comments_total Comment counters by type and sub
-# TYPE subreddit_comments_total counter
-subreddit_comments_total{subreddit="test", type="discussion"} 1
-subreddit_comments_total{subreddit="test", type="response"} 1
-
-

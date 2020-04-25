@@ -1,8 +1,10 @@
-name: Release
+name: Helm Release
 on:
   push:
     branches:
       - master
+    paths:
+      - "helm/**"
 
 jobs:
   release:

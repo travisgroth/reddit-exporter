@@ -45,7 +45,7 @@ docker run -p 8000:8000 travisgroth/reddit-exporter -s askreddit
 ## Helm
 See chart source [here](helm/reddit-exporter)
 ```
-$ helm repo add reddit-exporter https://reddit-exporter-chart.storage.googleapis.com
+$ helm repo add reddit-exporter https://travisgroth.github.io/reddit-exporter/
 "reddit-exporter" has been added to your repositories
 
 helm upgrade --install reddit-exporter-test reddit-exporter/reddit-exporter --set subreddits="{wtf,askreddit}"

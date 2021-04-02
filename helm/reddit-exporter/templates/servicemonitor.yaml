@@ -1,0 +1,22 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{include "reddit-exporter.fullname" .}}
+  labels:
+    app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+    helm.sh/chart: {{ include "reddit-exporter.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  jobLabel: reddit-exporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "reddit-exporter.name" . }}
+      helm.sh/chart: {{ include "reddit-exporter.chart" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+  endpoints:
+    - port: http
+      interval: 30s
+{{- end}}

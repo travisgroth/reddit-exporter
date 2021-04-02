@@ -47,6 +47,10 @@ tolerations: []
 
 affinity: {}
 
+serviceMonitor:
+  # Deploy a prometheus service monitor
+  enabled: false
+
 verbose: false
 regexMatches: false
 regexMatchesFormat: yaml
